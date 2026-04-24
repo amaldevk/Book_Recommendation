@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendation App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #009688;
+            padding: 10px 0;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #ccc;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            padding: 8px;
+            margin: 8px 0;
+            width: 250px;
+        }
+
+        button {
+            background-color: #009688;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            color: #009688;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="font-weight: bold;">Book-Rec System</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="/about">About</a>
+            <!-- Add more links as needed -->
+        </nav>
+    </header>
+
+    <form action="/" method="post">
+        <label for="book_name">Enter a book title:</label>
+        <input type="text" id="book_name" name="book_name" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if result %}
+        <h1 style="color: #009688;">Recommendations for "{{ request.form['book_name'] }}"</h1>
+        <ul>
+            {% for book_title in result %}
+                <li>{{ book_title }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/analysis"><button style="background-color: #009688; color: #fff; padding: 10px; border: none; cursor: pointer;">Click here for Analysis Graph</button></a>
+    {% else %}
+        <h1 style="color: #009688;">Recommendations for </h1>
+        <ul>
+            <li>No recommendations available</li>
+        </ul>
+    {% endif %}
+</body>
+</html>
